@@ -1,0 +1,235 @@
+<div class="container my-3 pt-2">
+    <div class="row">
+        <h2 class="text-center pt-4">Registration Form</h2>
+        <div class="form-bg col-md-6">
+            <form #regForm="ngForm" (ngSubmit)="register(regForm)">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" name="name" placeholder="Enter your name" ngModel required
+                        #name="ngModel" pattern="[a-zA-z]+$">
+                    <span *ngIf="name.invalid && name.touched" style="color: red;">Please enter the valid input</span>
+                </div>
+                <div class="form-group pt-2">
+                    <label for="rollNo">Roll Number</label>
+                    <input type="text" class="form-control" name="rollNo" placeholder="Enter your Roll Number" ngModel
+                        required #rollNo="ngModel" pattern="[0-9]+$">
+                    <span *ngIf="rollNo.invalid && rollNo.touched" style="color: red;">Please enter the valid
+                        input</span>
+                </div>
+                <div class="form-group pt-2">
+                    <label for="email">Email ID</label>
+                    <input type="text" class="form-control" name="email" placeholder="Enter your Email ID" ngModel
+                        required #email="ngModel" email>
+                    <span *ngIf="email.invalid && email.touched" style="color: red;">Please enter the valid input</span>
+                </div>
+                <div class="form-group pt-2">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" name="password" placeholder="Enter your Password"
+                        ngModel required #password="ngModel" minlength="3">
+                    <span *ngIf="password.invalid && password.touched" style="color: red;">Please enter the valid
+                        input</span>
+                </div>
+                <div class="form-group pt-2">
+                    <label for="address">Address</label>
+                    <input type="text" class="form-control" name="address" placeholder="Enter your Address" ngModel
+                        required #address="ngModel" maxlength="25">
+                    <span *ngIf="address.invalid && address.touched" style="color: red;">Please enter the valid
+                        input</span>
+                </div>
+                <div class="form-group pt-2">
+                    <label for="state">State</label>
+                    <input type="text" class="form-control" name="state" placeholder="Enter your state" ngModel required
+                        #state="ngModel" pattern="[a-zA-z]+$">
+                    <span *ngIf="state.invalid && state.touched" style="color: red;">Please enter the valid input</span>
+                </div>
+                <div class="text-center pt-4">
+                    <button class="btn btn-primary"[disabled]="regForm.invalid" >Submit form</button>
+                    <!-- <button class="btn btn-primary" [disabled]="!regForm.valid">Submit form</button> -->
+                    <!-- we can also write like this -->
+                </div>
+            </form>
+        </div>
+        <div class="container1 col-md-6 pt-3">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <td>S.No</td>
+                        <td>Name</td>
+                        <td>Roll NO</td>
+                        <td>Email ID</td>
+                        <td>State</td>
+                        <td>Action</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let s of students1; let i = index">
+                        <td>{{i+1}}</td>
+                        <td>{{s.name}}</td>
+                        <td>{{s.rollNo}}</td>
+                        <td>{{s.email}}</td>
+                        <td>{{s.state}}</td>
+                        <td>
+                            <button class="btn btn-success" (click)="edit(i)">Edit</button>
+                            <button class="btn btn-danger mx-2" (click)="delete(i)">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- <button class="btn btn-primary" (click)="showDelete()">delete</button> -->
+            <button class="btn btn-warning" (click)="asc()">Sort Asc</button>
+            <button class="btn btn-dark mx-2" (click)="des()">Sort Desc</button>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!-- 
+<h4 *ngFor="let item of userDetails; let i =index">
+    {{i+1}} {{item.name}} => {{item.rollNo}}
+</h4> -->
+
+
+<!-- <h4 *ngFor="let st of students">
+    Name is :{{st}}
+</h4> -->
+
+<!-- BOOTSTRAP -->
+<!-- <div class="container">
+    <div class="row">
+        <form #regForm="ngForm" (ngSubmit)="Register(regForm)" class="row g-3">
+            <h2 class="text-center">Registration Form</h2>
+            <div class="col-md-4">
+                <label for="validationCustom01" class="form-label">Name</label>
+                <input type="text" class="form-control" id="validationCustom01" ngModel required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label for="validationCustom02" class="form-label">Roll Number</label>
+                <input type="text" class="form-control" id="validationCustom02" ngModel required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label for="validationCustomUsername" class="form-label">Username</label>
+                <div class="input-group has-validation">
+                    <span class="input-group-text" id="inputGroupPrepend">@</span>
+                    <input type="text" class="form-control" id="validationCustomUsername"
+                        aria-describedby="inputGroupPrepend" ngModel required>
+                    <div class="invalid-feedback">
+                        Please choose a username.
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label for="validationCustom03" class="form-label">Address</label>
+                <input type="text" class="form-control" id="validationCustom03" ngModel required>
+                <div class="invalid-feedback">
+                    Please provide a valid address.
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label for="validationCustom04" class="form-label">City</label>
+                <select class="form-select" id="validationCustom04" required>
+                    <option selected disabled value="">Choose...</option>
+                    <option>Ajmer</option>
+                    <option>Alwar</option>
+                    <option>Bikaner</option>
+                    <option>Jaipur</option>
+                    <option>Jodhpur</option>
+                    <option>Udaipur</option>
+                </select>
+                <div class="invalid-feedback">
+                    Please select a valid city.
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label for="validationCustom05" class="form-label">State</label>
+                <input type="text" class="form-control" id="validationCustom05" required>
+                <div class="invalid-feedback">
+                    Please provide a valid State.
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                    <label class="form-check-label" for="invalidCheck">
+                        Agree to terms and conditions
+                    </label>
+                    <div class="invalid-feedback">
+                        You must agree before submitting.
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <button class="btn btn-primary" type="submit" id="submit" [disabled]="!regForm.valid">Submit form</button>
+            </div>
+        </form>
+    </div>
+</div> -->
+
+<!-- Q)how to make a template driven form? -->
+<!-- <div class="container">
+        <form #loginForm = ngForm (ngSubmit)="loginUser(loginForm)"> -->
+<!-- loginForm.value  here it will show nothing bcz we didn't bind with input fot that use ngModel-->
+<!-- <input type="text" name="name" placeholder="Enter Name"> -->
+<!-- <input type="text" name="name" placeholder="Enter Name" ngModel> -->
+<!-- if dont use name here it will show an error bcz input needs name same goes for password -->
+<!-- <br> <br>
+            <input type="password" name="Password" placeholder="Enter Password" ngModel>
+            <br> <br>
+            <button>login</button>
+        </form> -->
+<!-- now we get value & in form we can see different things like dirty, pristine, touched, value & status etc -->
+<!-- here in status it will always show valid for that we have to use validation for eg required-->
+<!-- </div>  -->
+<!-- here we are br tag for learning dont use this in real -->
+
+<!-- Q)can we use button outside the form? the anser is yes -->
+<!-- the form can be accesible with the use of loginForm -->
+<!-- <button (click)="loginUser(loginForm.value)">Outside button</button> -->
+<!-- <button (click)="loginUser(loginForm)">Outside button</button> -->
+
+<!-- now lets use validation -->
+<!-- <div class="container"> -->
+<!-- <form #loginForm=ngForm (ngSubmit)="loginUser(loginForm)"> -->
+<!-- <input type="text" name="name" placeholder="Enter Name" ngModel required #name="ngModel" pattern="[a-zA-z]+$"> -->
+<!-- here we have to define id #name -->
+<!-- required #name="ngModel" will show ng-dirty,ng-pristine,ng-invalid,ng-touched -->
+<!-- we can also validate characters by using pattern   -->
+<!-- <br><span *ngIf="name.invalid && name.touched" style="color: red;">Please enter the valid input</span> <br> -->
+<!-- *ngIf stands for  if condition -->
+<!-- <input type="text" name="email" placeholder="Enter Email" ngModel required #email="ngModel" email> -->
+<!-- <br><span *ngIf="email.invalid && email.touched" style="color: red;">Please enter the valid input</span> <br> -->
+<!-- here we can validate @ by using email -->
+<!-- <input type="password" name="Password" placeholder="Enter Password" ngModel required #password = "ngModel" minlength="2"> -->
+<!-- we can also validate length by using minlength & maxlength -->
+<!-- <br><span *ngIf="password.invalid && password.touched" style="color: red;">Please enter the valid input</span><br> -->
+<!-- <button>login</button> -->
+<!-- Q) how to disable login button if it is invalid?  -->
+<!-- <button [disabled]="loginForm.invalid">login</button> -->
+<!-- by using binding property -->
+<!-- </form> -->
+<!-- </div> -->
+<!-- Q) how to apply custom validation? ans by using Regex used in first input => pattern="[a-zA-z]+$" -->
+
+<!-- use of *ngFor(for loop) but in js & angular they are different -->
+<!-- <h4 *ngFor = "let item of users">
+{{item}}
+</h4> -->
+<!-- Q)how to print index? -->
+<!-- <h4 *ngFor = "let item of users; let i = index">
+   {{i+1}} {{item}}
+    </h4> -->
+<!-- Q) how to print users details? by using object in arrays & use *ngFor -->
+<!-- <h4 *ngFor="let item of userDetails"> -->
+<!-- {{item}} -->
+<!-- it will show [object Object] you have to use {{item.name}} like this -->
+<!-- {{item.name}} => {{item.rollNo}}
+</h4> -->
+<!-- Q) can we use loop in loop ? yes -->

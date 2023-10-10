@@ -1,0 +1,13 @@
+.container {
+    width: 80%;
+    height: 700px;
+    background-color: aqua;
+    border-radius: 20px;
+}
+input.ng-invalid.ng-touched{
+    border-color:yellow;
+}
+/* we can aplly css like this */
+input.ng-valid{
+    background-color: lightgray;
+}
